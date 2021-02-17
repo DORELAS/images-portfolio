@@ -1,0 +1,27 @@
+<div
+    infiniteScroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()"
+>
+
+    <div class="gallery" id="gallery">
+        <div class="gallery-item" *ngFor="let photo of images">
+            <div class="content">
+                <img [src]="photo.img_src" alt="">
+            </div>
+        </div>
+    </div>
+
+</div>
+<div>
+    <ngx-spinner
+        bdOpacity = 0.9
+        bdColor = ""
+        size="default"
+        color="primary"
+        type="ball-pulse-sync"
+        [fullScreen]="false"
+    ></ngx-spinner>
+</div>
+

@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  base_url: 'https://api.nasa.gov/mars-photos/api/',
+  api_key: 'DfTK0SMEozYqW8zhpwvOmrEcsxMe1Zczhb0t1nou',
+  name: 'Images Gallery'
 };
 
 /*
