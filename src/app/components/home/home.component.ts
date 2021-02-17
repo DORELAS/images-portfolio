@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
         this.spinnershow = false;
       }
     }, (error) => {
-      this.toastr.success('Some error has occured, please try again!', 'Error');
+      this.toastr.error('Some error has occured, please try again!', 'Error');
     });
   }
 
