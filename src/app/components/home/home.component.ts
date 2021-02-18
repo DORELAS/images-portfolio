@@ -9,11 +9,10 @@ import { ImagesService } from 'src/app/services/images/images.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  page = 1;
+  page = 0;
   images: any[] = [];
   scroll = true;
   spinnershow = false;
-  emptyImagesArray = true;
   constructor(
     private imagesService: ImagesService,
     private toastr: ToastrService,
@@ -27,12 +26,16 @@ export class HomeComponent implements OnInit {
   getAllImages(): void {
     this.imagesService.getImages(this.page).subscribe(response => {
       const arrayImages = response.photos;
-      arrayImages.forEach((element) => {
-        this.images.push(element);
-      });
-      if (this.spinnershow) {
-        this.spinner.hide();
-        this.spinnershow = false;
+      if (arrayImages.length > 0) {
+        arrayImages.forEach((element) => {
+          this.images.push(element);
+        });
+        if (this.spinnershow) {
+          this.spinner.hide();
+          this.spinnershow = false;
+        }
+      } else {
+        this.scroll = false;
       }
     }, (error) => {
       this.toastr.error('Some error has occured, please try again!', 'Error');
@@ -40,10 +43,9 @@ export class HomeComponent implements OnInit {
   }
 
   onScroll(): void {
-    if (this.scroll && this.emptyImagesArray) {
+    if (this.scroll) {
       this.spinner.show();
       this.spinnershow = true;
-      this.scroll = false;
       this.loadImages();
     }
   }
